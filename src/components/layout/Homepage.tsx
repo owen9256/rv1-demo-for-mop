@@ -10,10 +10,6 @@ const Homepage = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container mx-auto px-6 py-20">
           <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-            <Badge variant="secondary" className="px-4 py-2">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Powering Next-Generation AI Applications
-            </Badge>
             
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
               Build the Future with{" "}
