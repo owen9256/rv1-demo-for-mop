@@ -26,56 +26,56 @@ const Blog = () => {
     {
       id: 1,
       title: "Kimi K2 又又又提速了",
-      description: "我们持续优化 Kimi K2 模型性能，为用户提供更快、更智能的AI体验。了解最新的技术突破和性能提升。",
+      description: "经过工程师们的不懈努力，kimi-k2-turbo-preview 模型输出速度已经提升至每秒 60 Tokens，最高可达每秒 100 Tokens。目前仍然享受 5 折特惠价格。",
       date: "2025年08月22日",
       category: "whats-new",
-      tags: ["K2", "性能优化"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
+      tags: ["K2", "性能优化", "提速"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fwow.094c6630.png&w=3840&q=75"
     },
     {
       id: 2,
       title: "Kimi 开放平台：新功能发布记录",
-      description: "查看开放平台的最新功能更新，包括API改进、新工具发布和开发者体验优化。",
+      description: "本章节记录 Kimi 开放平台的产品功能和对应的文档动态，包括 Kimi K2 高速版模型发布、i18n forum 论坛上线、Kimi Playground 正式发布等重要更新。",
       date: "2025年08月21日",
       category: "whats-new",
-      tags: ["开放平台", "更新"],
+      tags: ["开放平台", "更新日志", "功能发布"],
       image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 3,
       title: "Kimi K2 高速版发布",
-      description: "全新的 Kimi K2 高速版正式发布，带来前所未有的处理速度和响应时间。",
+      description: "kimi-k2-turbo-preview 是 kimi-k2 的高速版，模型参数与 kimi-k2 一致，但输出速度由每秒 10 Tokens 提升至每秒 40 Tokens。目前限时 5 折特惠。",
       date: "2025年08月01日",
       category: "whats-new",
-      tags: ["K2", "发布"],
+      tags: ["K2", "高速版", "发布"],
       image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 4,
-      title: "AI 技术趋势：2025年展望",
-      description: "探索人工智能领域的最新趋势，分析技术发展方向和未来机遇。",
-      date: "2025年07月25日",
-      category: "newsletters",
-      tags: ["趋势分析", "AI"],
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
+      title: "Kimi Playground 一站式体验 Kimi K2 的工具调用能力",
+      description: "Kimi Playground 正式发布，为开发者带来便捷的工具调用能力体验平台。让 AI 从单纯的对话助手升级为能够调用各种工具的智能助理。",
+      date: "2025年07月17日",
+      category: "whats-new",
+      tags: ["Playground", "工具调用", "开发者"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 5,
-      title: "开发者生态建设进展",
-      description: "Moonshot AI 致力于构建强大的开发者生态系统，为全球开发者提供最优质的AI工具和服务。",
-      date: "2025年07月20日",
+      title: "Kimi K2: Open Agentic Intelligence",
+      description: "Kimi K2 是我们最新的专家混合模型，拥有 320 亿激活参数和 1 万亿总参数。在非思考模型中，它在前沿知识、数学和编程方面达到了最先进的性能。",
+      date: "2025年07月11日",
       category: "newsletters",
-      tags: ["生态", "开发者"],
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+      tags: ["K2", "开源", "AI模型"],
+      image: "https://statics.moonshot.cn/kimi-blog/assets/logo-CvjirWOb.svg"
     },
     {
       id: 6,
-      title: "Kimi Playground 一站式体验",
-      description: "全新的 Kimi Playground 让您能够一站式体验 Kimi K2 的强大工具调用能力。",
-      date: "2025年07月17日",
-      category: "whats-new",
-      tags: ["Playground", "工具"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+      title: "Kimi 长思考模型 API 正式发布",
+      description: "kimi-thinking-preview 模型是月之暗面提供的具有多模态推理能力和通用推理能力的多模态思考模型，擅长深度推理，帮助解决更多更难的问题。",
+      date: "2025年05月06日",
+      category: "newsletters",
+      tags: ["思考模型", "API", "推理"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     }
   ];
 
