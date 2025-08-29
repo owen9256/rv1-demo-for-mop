@@ -43,48 +43,59 @@ const Support = () => {
   };
 
   const uploadFiles = async (files: File[]): Promise<string[]> => {
-    const uploadPromises = files.map(async (file) => {
+    const uploadedUrls: string[] = [];
+    
+    for (const file of files) {
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const fileName = `${Date.now()}-${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('support-attachments')
         .upload(filePath, file);
 
-      if (error) {
-        console.error('Error uploading file:', error);
-        throw error;
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        throw new Error(`文件 ${file.name} 上传失败`);
       }
 
-      return filePath;
-    });
+      uploadedUrls.push(filePath);
+    }
 
-    return Promise.all(uploadPromises);
+    return uploadedUrls;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.module || !formData.helpType || !formData.subject || !formData.description) {
-      toast({
-        title: "表单验证失败",
-        description: "请填写所有必填字段。",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.module || !formData.helpType || !formData.subject || !formData.description) {
+        toast({
+          title: "表单验证失败",
+          description: "请填写所有必填字段",
+          variant: "destructive",
+        });
+        return;
+      }
+
       // Upload files if any
       let attachmentUrls: string[] = [];
       if (formData.attachments.length > 0) {
-        attachmentUrls = await uploadFiles(formData.attachments);
+        try {
+          attachmentUrls = await uploadFiles(formData.attachments);
+        } catch (error) {
+          toast({
+            title: "文件上传失败",
+            description: error instanceof Error ? error.message : "文件上传时发生错误",
+            variant: "destructive",
+          });
+          return;
+        }
       }
 
-      // Submit support ticket
+      // Submit to database
       const { error } = await supabase
         .from('support_tickets')
         .insert({
@@ -96,13 +107,24 @@ const Support = () => {
           help_type: formData.helpType,
           subject: formData.subject,
           description: formData.description,
-          attachment_urls: attachmentUrls.length > 0 ? attachmentUrls : null,
+          attachment_urls: attachmentUrls,
         });
 
       if (error) {
-        console.error('Error submitting support ticket:', error);
-        throw error;
+        console.error('Database error:', error);
+        toast({
+          title: "提交失败",
+          description: "系统错误，请稍后重试或联系管理员",
+          variant: "destructive",
+        });
+        return;
       }
+
+      // Success
+      toast({
+        title: "反馈已提交",
+        description: "感谢您的反馈，我们会尽快回复您。",
+      });
 
       // Reset form
       setFormData({
@@ -117,15 +139,11 @@ const Support = () => {
         attachments: []
       });
 
-      toast({
-        title: "反馈已提交",
-        description: "感谢您的反馈，我们会尽快回复您。",
-      });
     } catch (error) {
       console.error('Submission error:', error);
       toast({
         title: "提交失败",
-        description: "提交过程中出现错误，请稍后重试。",
+        description: "发生未知错误，请稍后重试",
         variant: "destructive",
       });
     } finally {
@@ -216,6 +234,7 @@ const Support = () => {
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           placeholder="请输入您的姓名"
                           required
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="space-y-2">
@@ -227,6 +246,7 @@ const Support = () => {
                           onChange={(e) => handleInputChange("email", e.target.value)}
                           placeholder="请输入您的邮箱"
                           required
+                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -239,6 +259,7 @@ const Support = () => {
                           value={formData.phone}
                           onChange={(e) => handleInputChange("phone", e.target.value)}
                           placeholder="请输入您的电话号码"
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="space-y-2">
@@ -248,6 +269,7 @@ const Support = () => {
                           value={formData.company}
                           onChange={(e) => handleInputChange("company", e.target.value)}
                           placeholder="请输入您的公司或组织"
+                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -256,7 +278,7 @@ const Support = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="module">相关模块 *</Label>
-                        <Select value={formData.module} onValueChange={(value) => handleInputChange("module", value)}>
+                        <Select value={formData.module} onValueChange={(value) => handleInputChange("module", value)} disabled={isSubmitting}>
                           <SelectTrigger>
                             <SelectValue placeholder="选择相关的功能模块" />
                           </SelectTrigger>
@@ -273,7 +295,7 @@ const Support = () => {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="helpType">问题类型 *</Label>
-                        <Select value={formData.helpType} onValueChange={(value) => handleInputChange("helpType", value)}>
+                        <Select value={formData.helpType} onValueChange={(value) => handleInputChange("helpType", value)} disabled={isSubmitting}>
                           <SelectTrigger>
                             <SelectValue placeholder="选择问题类型" />
                           </SelectTrigger>
@@ -299,6 +321,7 @@ const Support = () => {
                         onChange={(e) => handleInputChange("subject", e.target.value)}
                         placeholder="请简要描述您的问题"
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -311,6 +334,7 @@ const Support = () => {
                         placeholder="请详细描述您遇到的问题、期望的功能或需要的帮助..."
                         className="min-h-[120px]"
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -329,11 +353,13 @@ const Support = () => {
                           accept="image/*,.pdf,.txt,.log,.json"
                           onChange={handleFileUpload}
                           className="hidden"
+                          disabled={isSubmitting}
                         />
                         <Button
                           type="button"
                           variant="outline"
                           onClick={() => document.getElementById("attachments")?.click()}
+                          disabled={isSubmitting}
                         >
                           选择文件
                         </Button>
@@ -351,6 +377,7 @@ const Support = () => {
                                   type="button"
                                   onClick={() => removeFile(index)}
                                   className="ml-2 text-muted-foreground hover:text-foreground"
+                                  disabled={isSubmitting}
                                 >
                                   ×
                                 </button>
@@ -363,14 +390,8 @@ const Support = () => {
 
                     {/* Submit Button */}
                     <Button type="submit" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          提交中...
-                        </>
-                      ) : (
-                        "提交反馈"
-                      )}
+                      {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      {isSubmitting ? "提交中..." : "提交反馈"}
                     </Button>
                   </form>
                 </CardContent>
