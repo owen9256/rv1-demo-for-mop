@@ -30,7 +30,7 @@ const Blog = () => {
       date: "2025年08月22日",
       category: "whats-new",
       tags: ["K2", "性能优化", "提速"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fwow.094c6630.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 2,
@@ -84,7 +84,7 @@ const Blog = () => {
       date: "2024年09月02日",
       category: "newsletters",
       tags: ["游戏开发", "Unreal5", "AIGC"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fheishenhua.78d033e4.jpeg&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 8,
@@ -93,7 +93,7 @@ const Blog = () => {
       date: "2024年08月07日",
       category: "whats-new",
       tags: ["价格调整", "Cache", "降价"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fplatform.ce5d0951.png&w=384&q=75"
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 9,
@@ -102,7 +102,7 @@ const Blog = () => {
       date: "2024年08月02日",
       category: "whats-new",
       tags: ["企业级", "API", "发布"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fkey-account.026dd699.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
