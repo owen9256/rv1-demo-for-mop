@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User, LogOut, Settings } from "lucide-react";
+import moonshotLogo from "@/assets/moonshot-logo.svg";
 
 const Header = () => {
   return (
@@ -13,18 +14,7 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <a href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 flex items-center justify-center">
-              <svg viewBox="0 0 32 32" className="w-8 h-8">
-                <g fill="currentColor">
-                  <rect x="2" y="4" width="28" height="3" rx="1.5"/>
-                  <rect x="2" y="9" width="28" height="3" rx="1.5"/>
-                  <rect x="2" y="14" width="28" height="3" rx="1.5"/>
-                  <rect x="2" y="19" width="28" height="3" rx="1.5"/>
-                  <rect x="2" y="24" width="28" height="3" rx="1.5"/>
-                </g>
-              </svg>
-            </div>
-            <span className="font-semibold text-lg">Moonshot AI</span>
+            <img src={moonshotLogo} alt="Moonshot AI" className="h-8" />
           </a>
         </div>
         
