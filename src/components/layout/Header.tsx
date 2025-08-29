@@ -36,7 +36,7 @@ const Header = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <a href="/blog/newsletters" className="flex cursor-pointer">
-                  Newsletters
+                  News letters
                 </a>
               </DropdownMenuItem>
             </DropdownMenuContent>

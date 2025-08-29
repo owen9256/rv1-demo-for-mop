@@ -89,7 +89,7 @@ const Blog = () => {
   const filters = [
     { id: "all", label: "所有内容", count: blogPosts.length },
     { id: "whats-new", label: "功能更新", count: blogPosts.filter(p => p.category === "whats-new").length },
-    { id: "newsletters", label: "技术资讯", count: blogPosts.filter(p => p.category === "newsletters").length }
+    { id: "newsletters", label: "News letters", count: blogPosts.filter(p => p.category === "newsletters").length }
   ];
 
   return (
@@ -180,7 +180,7 @@ const Blog = () => {
                   
                   <div className="mt-4">
                     <Badge variant={post.category === "whats-new" ? "default" : "outline"}>
-                      {post.category === "whats-new" ? "功能更新" : "技术资讯"}
+                      {post.category === "whats-new" ? "功能更新" : "News letters"}
                     </Badge>
                   </div>
                 </CardContent>
