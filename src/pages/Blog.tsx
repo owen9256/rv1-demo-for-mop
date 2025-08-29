@@ -76,6 +76,33 @@ const Blog = () => {
       category: "newsletters",
       tags: ["思考模型", "API", "推理"],
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 7,
+      title: "使用 Unreal5 游戏引擎和 Kimi 大模型开发交互式游戏",
+      description: "结合 AIGC 技术，我们可以快速扩充游戏角色的对白，构建出一个更加生动的西游世界。使用 cpp 版本的 OpenAI SDK 可以在原生 cpp 的基础上调用 Kimi 大模型。",
+      date: "2024年09月02日",
+      category: "newsletters",
+      tags: ["游戏开发", "Unreal5", "AIGC"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fheishenhua.78d033e4.jpeg&w=3840&q=75"
+    },
+    {
+      id: 8,
+      title: "Context Caching 降价通知",
+      description: "Cache 存储费用由 10元/M token/分钟，降低至 5 元/M token/分钟。价格生效时间：2024年8月7日 00:00:00。",
+      date: "2024年08月07日",
+      category: "whats-new",
+      tags: ["价格调整", "Cache", "降价"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fplatform.ce5d0951.png&w=384&q=75"
+    },
+    {
+      id: 9,
+      title: "Kimi 企业级 API 正式发布",
+      description: "Kimi 企业级 API 正式发布，为企业级用户提供更高等级的数据安全保障、更高等级的并发速率、专属技术支持服务和下一代模型/新能力优先体验。",
+      date: "2024年08月02日",
+      category: "whats-new",
+      tags: ["企业级", "API", "发布"],
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2Fkey-account.026dd699.png&w=3840&q=75"
     }
   ];
 
