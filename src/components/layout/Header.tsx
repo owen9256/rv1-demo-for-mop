@@ -32,7 +32,7 @@ const Header = () => {
             <a href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               文档
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/events" className="text-muted-foreground hover:text-foreground transition-colors">
               活动
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
