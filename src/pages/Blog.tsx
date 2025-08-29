@@ -30,7 +30,7 @@ const Blog = () => {
       date: "2025年08月22日",
       category: "whats-new",
       tags: ["K2", "性能优化"],
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ const Blog = () => {
       date: "2025年08月21日",
       category: "whats-new",
       tags: ["开放平台", "更新"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 3,
@@ -48,7 +48,7 @@ const Blog = () => {
       date: "2025年08月01日",
       category: "whats-new",
       tags: ["K2", "发布"],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&q=80"
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
     },
     {
       id: 4,
