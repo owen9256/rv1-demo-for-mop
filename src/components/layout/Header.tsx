@@ -17,14 +17,14 @@ const Header = () => {
 
   return (
     <header className="border-b bg-background px-6 py-3">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center w-full">
         <div className="flex items-center space-x-2">
           <a href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <img src={moonshotLogo} alt="Moonshot AI" className="h-8" />
           </a>
         </div>
         
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-6 flex-1 justify-center">
           <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
             Blog
           </a>
