@@ -1,11 +1,18 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/layout/Header";
+import PromoBanner from "@/components/layout/PromoBanner";
+import Sidebar from "@/components/layout/Sidebar";
+import MainContent from "@/components/layout/MainContent";
+import TableOfContents from "@/components/layout/TableOfContents";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen flex flex-col bg-background">
+      <PromoBanner />
+      <Header />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
+        <MainContent />
+        <TableOfContents />
       </div>
     </div>
   );
