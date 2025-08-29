@@ -76,7 +76,7 @@ const Events = () => {
       type: "launch",
       status: "已结束",
       attendees: "2000+",
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&q=80",
+      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75",
       tags: ["产品发布", "K2", "高速版"],
       recording: "https://example.com/recording"
     },
