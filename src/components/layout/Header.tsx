@@ -19,9 +19,9 @@ const Header = () => {
     <header className="border-b bg-background px-6 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <a href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <img src={moonshotLogo} alt="Moonshot AI" className="h-8" />
-          </a>
+          </Link>
         </div>
         
         <div className="flex items-center space-x-6">
