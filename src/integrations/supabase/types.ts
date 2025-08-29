@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      support_tickets: {
+        Row: {
+          attachment_urls: string[] | null
+          company: string | null
+          created_at: string
+          description: string
+          email: string
+          help_type: string
+          id: string
+          module: string
+          name: string
+          phone: string | null
+          priority: string
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          attachment_urls?: string[] | null
+          company?: string | null
+          created_at?: string
+          description: string
+          email: string
+          help_type: string
+          id?: string
+          module: string
+          name: string
+          phone?: string | null
+          priority?: string
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          attachment_urls?: string[] | null
+          company?: string | null
+          created_at?: string
+          description?: string
+          email?: string
+          help_type?: string
+          id?: string
+          module?: string
+          name?: string
+          phone?: string | null
+          priority?: string
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
