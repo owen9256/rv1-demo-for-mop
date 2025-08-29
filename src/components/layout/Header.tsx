@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Calendar, HelpCircle, Wrench, Building } from "lucide-react";
+import { User, Calendar, HelpCircle, Wrench, Building, LogOut } from "lucide-react";
 import moonshotLogo from "@/assets/moonshot-logo.svg";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
-  // For demo purposes, using state to simulate login status
-  // In a real app, this would come from your auth context/store
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { user, isAuthenticated, login, logout } = useAuth();
 
   return (
     <header className="border-b bg-background px-6 py-3">
@@ -39,8 +39,8 @@ const Header = () => {
               支持
             </a>
           </nav>
-          {!isLoggedIn ? (
-            <Button onClick={() => setIsLoggedIn(true)}>
+          {!isAuthenticated ? (
+            <Button onClick={() => login()}>
               开始使用
             </Button>
           ) : (
@@ -49,29 +49,35 @@ const Header = () => {
                 <Button variant="ghost" size="icon" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src="/placeholder-avatar.jpg" alt="User avatar" />
-                    <AvatarFallback>U</AvatarFallback>
+                    <AvatarFallback>{user?.name?.charAt(0) || 'U'}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuItem className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">用户名</p>
+                    <p className="text-sm font-medium leading-none">{user?.name}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      user@example.com
+                      {user?.email}
                     </p>
                   </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Building className="mr-2 h-4 w-4" />
-                  <span>用户中心</span>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/console" className="flex items-center">
+                    <Building className="mr-2 h-4 w-4" />
+                    <span>用户中心</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Wrench className="mr-2 h-4 w-4" />
-                  <span>开发工作台</span>
+                <DropdownMenuItem asChild>
+                  <Link to="/console" className="flex items-center">
+                    <Wrench className="mr-2 h-4 w-4" />
+                    <span>开发工作台</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setIsLoggedIn(false)}>
-                  <User className="mr-2 h-4 w-4" />
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout}>
+                  <LogOut className="mr-2 h-4 w-4" />
                   <span>退出登录</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
