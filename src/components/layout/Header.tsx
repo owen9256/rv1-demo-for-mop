@@ -5,12 +5,12 @@ const Header = () => {
     <header className="border-b bg-background px-6 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2">
+          <a href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">M</span>
             </div>
             <span className="font-semibold text-lg">Moonshot AI</span>
-          </div>
+          </a>
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
