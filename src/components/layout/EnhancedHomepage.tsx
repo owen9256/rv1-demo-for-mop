@@ -40,7 +40,7 @@ const EnhancedHomepage = () => {
             
             <h1 id="hero-heading" className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
               强大的大语言模型{" "}
-              <span className="bg-gradient-to-r from-primary to-accent-purple bg-clip-text text-transparent animate-glow">
+              <span className="bg-gradient-to-r from-primary to-accent-purple bg-clip-text text-transparent">
                 API 服务
               </span>
             </h1>
