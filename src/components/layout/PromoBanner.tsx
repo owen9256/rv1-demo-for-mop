@@ -1,5 +1,5 @@
 import { AlertTriangle } from "lucide-react";
 const PromoBanner = () => {
-  return;
+  return null;
 };
 export default PromoBanner;
