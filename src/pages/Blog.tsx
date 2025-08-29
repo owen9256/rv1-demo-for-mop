@@ -5,11 +5,24 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Search, Calendar, Tag } from "lucide-react";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import SEOHead from "@/components/seo/SEOHead";
 
 const Blog = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Moonshot AI 技术博客",
+    "description": "Moonshot AI官方技术博客，分享AI技术动态、产品更新和最佳实践。",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Moonshot AI"
+    }
+  };
 
   // Set filter based on URL path
   useEffect(() => {
@@ -120,30 +133,33 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            我们的博客
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            了解 Moonshot AI 的技术进展、产品更新和行业洞察
-          </p>
-        </div>
-      </section>
+    <>
+      <SEOHead 
+        title="技术博客 - Moonshot AI"
+        description="Moonshot AI官方技术博客，分享AI技术动态、产品更新和最佳实践。了解最新的大语言模型技术发展和行业趋势。"
+        keywords="Moonshot AI博客, AI技术, 大语言模型, 产品更新, 技术分享, AI资讯"
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
+        
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              技术博客
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              分享最新的 AI 技术动态和产品更新，与开发者社区共同成长
+            </p>
+          </div>
+        </section>
 
-      {/* Content Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-8">文章</h2>
-          
-          {/* Search and Filter */}
-          <div className="flex flex-col md:flex-row gap-6 mb-8">
+        {/* Content Section */}
+        <main className="max-w-7xl mx-auto px-6 py-16" role="main">
+          <div className="flex flex-col md:flex-row gap-6 mb-12">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
                 placeholder="搜索文章..."
                 value={searchQuery}
@@ -156,10 +172,10 @@ const Blog = () => {
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     activeFilter === filter.id
                       ? "bg-primary text-primary-foreground"
-                      : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                   }`}
                 >
                   {filter.label} ({filter.count})
@@ -168,27 +184,26 @@ const Blog = () => {
             </div>
           </div>
 
-          {/* Blog Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={`${post.title}文章配图`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
                 
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-2 mb-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">{post.date}</span>
+                    <time className="text-sm text-muted-foreground">{post.date}</time>
                   </div>
-                  <h3 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                  <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
                     {post.title}
-                  </h3>
+                  </h2>
                 </CardHeader>
                 
                 <CardContent className="pt-0">
@@ -196,7 +211,7 @@ const Blog = () => {
                     {post.description}
                   </p>
                   
-                  <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap mb-4">
                     <Tag className="h-3 w-3 text-muted-foreground" />
                     {post.tags.map((tag, index) => (
                       <Badge key={index} variant="secondary" className="text-xs">
@@ -205,11 +220,9 @@ const Blog = () => {
                     ))}
                   </div>
                   
-                  <div className="mt-4">
-                    <Badge variant={post.category === "whats-new" ? "default" : "outline"}>
-                      {post.category === "whats-new" ? "功能更新" : "News letters"}
-                    </Badge>
-                  </div>
+                  <Badge variant={post.category === "whats-new" ? "default" : "outline"}>
+                    {post.category === "whats-new" ? "功能更新" : "技术通讯"}
+                  </Badge>
                 </CardContent>
               </Card>
             ))}
@@ -217,12 +230,14 @@ const Blog = () => {
           
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">未找到匹配的文章</p>
+              <p className="text-muted-foreground text-lg">没有找到匹配的文章</p>
             </div>
           )}
-        </div>
-      </section>
-    </div>
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 };
 

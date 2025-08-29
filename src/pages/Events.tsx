@@ -3,10 +3,23 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Calendar, MapPin, Users, Clock, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import SEOHead from "@/components/seo/SEOHead";
 import { Button } from "@/components/ui/button";
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "EventSeries",
+    "name": "Moonshot AI 开发者活动",
+    "description": "Moonshot AI举办的技术活动，包括开发者大会、技术分享会、产品发布会等。",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Moonshot AI"
+    }
+  };
 
   interface Event {
     id: number;
@@ -121,139 +134,159 @@ const Events = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            开发者活动
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            参加 Moonshot AI 举办的技术活动，与开发者社区共同学习和成长
-          </p>
-        </div>
-      </section>
-
-      {/* Content Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        {/* Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="flex bg-secondary rounded-lg p-1">
-            <button
-              onClick={() => setActiveTab("upcoming")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                activeTab === "upcoming"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              即将举行
-            </button>
-            <button
-              onClick={() => setActiveTab("past")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                activeTab === "past"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              往期活动
-            </button>
-          </div>
-        </div>
-
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {events.map((event) => (
-            <Card key={event.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                <div className="absolute top-4 left-4">
-                  <Badge className={getEventTypeColor(event.type)}>
-                    {getEventTypeLabel(event.type)}
-                  </Badge>
-                </div>
-              </div>
-              
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground">{event.date}</span>
-                  <Badge variant={event.status === "已结束" ? "secondary" : "default"} className="ml-auto">
-                    {event.status}
-                  </Badge>
-                </div>
-                <h3 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
-              </CardHeader>
-              
-              <CardContent className="pt-0">
-                <p className="text-muted-foreground mb-4 line-clamp-3">
-                  {event.description}
-                </p>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-3 w-3" />
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-3 w-3" />
-                    <span>{event.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Users className="h-3 w-3" />
-                    <span>{event.attendees} 参与者</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2 flex-wrap mb-4">
-                  {event.tags.map((tag, index) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex gap-2">
-                  {activeTab === "upcoming" ? (
-                    <Button className="w-full">
-                      立即报名
-                    </Button>
-                  ) : (
-                    <>
-                      {event.recording && (
-                        <Button variant="outline" className="flex-1">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          观看回放
-                        </Button>
-                      )}
-                      <Button variant="ghost" className="flex-1">
-                        查看详情
-                      </Button>
-                    </>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+    <>
+      <SEOHead 
+        title="开发者活动 - Moonshot AI"
+        description="参加Moonshot AI举办的技术活动，包括开发者大会、在线研讨会、技术工作坊等。与开发者社区共同学习AI技术，分享最佳实践。"
+        keywords="Moonshot AI活动, 开发者大会, AI技术分享, 在线研讨会, 技术工作坊"
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
         
-        {events.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">暂无相关活动</p>
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              开发者活动
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              参加 Moonshot AI 举办的技术活动，与开发者社区共同学习和成长
+            </p>
           </div>
-        )}
-      </section>
-    </div>
+        </section>
+
+        {/* Content Section */}
+        <main className="max-w-7xl mx-auto px-6 py-16" role="main">
+          {/* Tabs */}
+          <div className="flex justify-center mb-12">
+            <div className="flex bg-secondary rounded-lg p-1" role="tablist" aria-label="活动分类">
+              <button
+                onClick={() => setActiveTab("upcoming")}
+                role="tab"
+                aria-selected={activeTab === "upcoming"}
+                className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === "upcoming"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                即将举行
+              </button>
+              <button
+                onClick={() => setActiveTab("past")}
+                role="tab"
+                aria-selected={activeTab === "past"}
+                className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === "past"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                往期活动
+              </button>
+            </div>
+          </div>
+
+          {/* Events Grid */}
+          <section 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="tabpanel"
+            aria-labelledby={activeTab === "upcoming" ? "upcoming-events" : "past-events"}
+          >
+            {events.map((event) => (
+              <article key={event.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-card rounded-lg border">
+                <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={`${event.title}活动宣传图`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <Badge className={getEventTypeColor(event.type)}>
+                      {getEventTypeLabel(event.type)}
+                    </Badge>
+                  </div>
+                </div>
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                    <time className="text-sm text-muted-foreground" dateTime={event.date}>
+                      {event.date}
+                    </time>
+                    <Badge variant={event.status === "已结束" ? "secondary" : "default"} className="ml-auto">
+                      {event.status}
+                    </Badge>
+                  </div>
+                  <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                    {event.title}
+                  </h2>
+                </CardHeader>
+                
+                <CardContent className="pt-0">
+                  <p className="text-muted-foreground mb-4 line-clamp-3">
+                    {event.description}
+                  </p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock className="h-3 w-3" aria-hidden="true" />
+                      <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <MapPin className="h-3 w-3" aria-hidden="true" />
+                      <span>{event.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Users className="h-3 w-3" aria-hidden="true" />
+                      <span>{event.attendees} 参与者</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 flex-wrap mb-4" role="list" aria-label="活动标签">
+                    {event.tags.map((tag, index) => (
+                      <Badge key={index} variant="secondary" className="text-xs" role="listitem">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    {activeTab === "upcoming" ? (
+                      <Button className="w-full" aria-label={`报名参加${event.title}`}>
+                        立即报名
+                      </Button>
+                    ) : (
+                      <>
+                        {event.recording && (
+                          <Button variant="outline" className="flex-1" aria-label={`观看${event.title}回放`}>
+                            <ExternalLink className="h-4 w-4 mr-2" aria-hidden="true" />
+                            观看回放
+                          </Button>
+                        )}
+                        <Button variant="ghost" className="flex-1" aria-label={`查看${event.title}详情`}>
+                          查看详情
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                </CardContent>
+              </article>
+            ))}
+          </section>
+          
+          {events.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">暂无相关活动</p>
+            </div>
+          )}
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 };
 
