@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,20 @@ import { Link } from "react-router-dom";
 
 const EnhancedHomepage = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isPromoBannerVisible, setIsPromoBannerVisible] = useState(true);
+
+  useEffect(() => {
+    const isDismissed = localStorage.getItem('promo-banner-dismissed');
+    if (isDismissed === 'true') {
+      setIsPromoBannerVisible(false);
+    }
+  }, []);
+
+  const handlePromoBannerClick = () => {
+    localStorage.setItem('promo-banner-dismissed', 'true');
+    setIsPromoBannerVisible(false);
+    window.open('https://platform.moonshot.cn/docs/promotion', '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -15,12 +29,14 @@ const EnhancedHomepage = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container mx-auto px-6 relative">
           <article className="flex flex-col items-center text-center space-y-8 max-w-5xl mx-auto animate-fade-in">
-            <a href="https://platform.moonshot.cn/docs/promotion" target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Badge variant="secondary" className="px-6 py-3 text-sm font-medium bg-gradient-to-r from-primary/10 to-accent-purple/10 border-primary/20 animate-bounce-gentle hover:scale-105 transition-transform cursor-pointer">
-                <Zap className="w-4 h-4 mr-2 text-primary" aria-hidden="true" />
-                🚀 kimi-k2-turbo-preview 输出速度已提至 100tokens/s
-              </Badge>
-            </a>
+            {isPromoBannerVisible && (
+              <div onClick={handlePromoBannerClick} className="inline-block cursor-pointer">
+                <Badge variant="secondary" className="px-6 py-3 text-sm font-medium bg-gradient-to-r from-primary/10 to-accent-purple/10 border-primary/20 animate-bounce-gentle hover:scale-105 transition-transform">
+                  <Zap className="w-4 h-4 mr-2 text-primary" aria-hidden="true" />
+                  🚀 kimi-k2-turbo-preview 输出速度已提至 60tokens/s，最高可达 100tokens/s，限时促销中，快来体验吧！
+                </Badge>
+              </div>
+            )}
             
             <h1 id="hero-heading" className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
               强大的大语言模型{" "}
