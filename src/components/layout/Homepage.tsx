@@ -2,19 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Zap, Code, BookOpen, Users, Cpu, MessageSquare, Image, Sparkles, Eye, Brain, FileText, Globe } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 
 const Homepage = () => {
-  const { isAuthenticated, login } = useAuth();
-
-  const handleGetStarted = () => {
-    if (isAuthenticated) {
-      window.location.href = "/console";
-    } else {
-      login("/console");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -36,7 +25,7 @@ const Homepage = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="px-8" onClick={handleGetStarted} aria-label="立即开始使用Moonshot AI API">
+              <Button size="lg" className="px-8" aria-label="立即开始使用Moonshot AI API">
                 立即开始
                 <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
               </Button>
@@ -248,7 +237,7 @@ const Homepage = () => {
               获取 API 密钥，立即体验强大的大语言模型能力。简单易用的接口，让 AI 赋能您的应用。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="px-8" onClick={handleGetStarted} aria-label="立即开始使用Moonshot AI服务">
+              <Button size="lg" className="px-8" aria-label="立即开始使用Moonshot AI服务">
                 立即开始使用
                 <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
               </Button>
