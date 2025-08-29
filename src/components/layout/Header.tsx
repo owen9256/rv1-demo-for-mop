@@ -27,21 +27,21 @@ const Header = () => {
         <div className="flex items-center space-x-6">
           <nav className="hidden md:flex items-center space-x-6">
             <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
-              Blog
+              博客
             </a>
             <a href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
-              Docs
+              文档
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Event
+              活动
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Support
+              支持
             </a>
           </nav>
           {!isLoggedIn ? (
             <Button onClick={() => setIsLoggedIn(true)}>
-              Get started
+              开始使用
             </Button>
           ) : (
             <DropdownMenu>
