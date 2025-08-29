@@ -39,7 +39,7 @@ const Blog = () => {
       date: "2025年08月21日",
       category: "whats-new",
       tags: ["开放平台", "更新日志", "功能发布"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 3,
@@ -48,7 +48,7 @@ const Blog = () => {
       date: "2025年08月01日",
       category: "whats-new",
       tags: ["K2", "高速版", "发布"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 4,
@@ -57,7 +57,7 @@ const Blog = () => {
       date: "2025年07月17日",
       category: "whats-new",
       tags: ["Playground", "工具调用", "开发者"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 5,
@@ -66,7 +66,7 @@ const Blog = () => {
       date: "2025年07月11日",
       category: "newsletters",
       tags: ["K2", "开源", "AI模型"],
-      image: "https://statics.moonshot.cn/kimi-blog/assets/logo-CvjirWOb.svg"
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 6,
@@ -75,7 +75,7 @@ const Blog = () => {
       date: "2025年05月06日",
       category: "newsletters",
       tags: ["思考模型", "API", "推理"],
-      image: "https://platform.moonshot.cn/blog/_next/image?url=%2Fblog%2F_next%2Fstatic%2Fmedia%2F%E7%99%BD%E8%89%B2%E5%85%AC%E4%BC%97%E5%8F%B7.459ee261.png&w=3840&q=75"
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
