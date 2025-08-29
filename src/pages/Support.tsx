@@ -6,12 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Upload, Phone, Mail, MessageCircle, FileText, Bug, Lightbulb } from "lucide-react";
+import { Upload, Phone, Mail, MessageCircle, FileText, Bug, Lightbulb, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/layout/Header";
 
 const Support = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,12 +42,95 @@ const Support = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "反馈已提交",
-      description: "感谢您的反馈，我们会尽快回复您。",
+  const uploadFiles = async (files: File[]): Promise<string[]> => {
+    const uploadPromises = files.map(async (file) => {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error } = await supabase.storage
+        .from('support-attachments')
+        .upload(filePath, file);
+
+      if (error) {
+        console.error('Error uploading file:', error);
+        throw error;
+      }
+
+      return filePath;
     });
+
+    return Promise.all(uploadPromises);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.module || !formData.helpType || !formData.subject || !formData.description) {
+      toast({
+        title: "表单验证失败",
+        description: "请填写所有必填字段。",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Upload files if any
+      let attachmentUrls: string[] = [];
+      if (formData.attachments.length > 0) {
+        attachmentUrls = await uploadFiles(formData.attachments);
+      }
+
+      // Submit support ticket
+      const { error } = await supabase
+        .from('support_tickets')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          company: formData.company || null,
+          module: formData.module,
+          help_type: formData.helpType,
+          subject: formData.subject,
+          description: formData.description,
+          attachment_urls: attachmentUrls.length > 0 ? attachmentUrls : null,
+        });
+
+      if (error) {
+        console.error('Error submitting support ticket:', error);
+        throw error;
+      }
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        module: "",
+        helpType: "",
+        subject: "",
+        description: "",
+        attachments: []
+      });
+
+      toast({
+        title: "反馈已提交",
+        description: "感谢您的反馈，我们会尽快回复您。",
+      });
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast({
+        title: "提交失败",
+        description: "提交过程中出现错误，请稍后重试。",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -277,8 +362,15 @@ const Support = () => {
                     </div>
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full">
-                      提交反馈
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          提交中...
+                        </>
+                      ) : (
+                        "提交反馈"
+                      )}
                     </Button>
                   </form>
                 </CardContent>
