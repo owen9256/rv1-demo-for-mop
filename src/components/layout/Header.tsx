@@ -29,13 +29,13 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem asChild>
-                <a href="https://platform.moonshot.cn/blog/whats-new" className="flex cursor-pointer">
+                <a href="/blog/whats-new" className="flex cursor-pointer">
                   What's New
                 </a>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <a href="https://platform.moonshot.cn/blog/newsletters" className="flex cursor-pointer">
+                <a href="/blog/newsletters" className="flex cursor-pointer">
                   Newsletters
                 </a>
               </DropdownMenuItem>
